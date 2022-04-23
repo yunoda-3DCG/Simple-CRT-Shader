@@ -37,6 +37,6 @@ The list of effects:
 License
 -------
 
-Copyright (C) 2021 yunoda
+Copyright (C) 2022 yunoda
 
 This software is released under the MIT License, see LICENSE.
