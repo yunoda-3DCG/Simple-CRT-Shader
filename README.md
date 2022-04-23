@@ -43,4 +43,4 @@ This software is released under the MIT License, see LICENSE.
 
 Keywords
 --------
-Unity, HLSL, CRT, Video, ブラウン管, テレビ, ポスプロ,　ポストエフェクト
+Unity, HLSL, CRT, Video, ブラウン管, テレビ, ポスプロ,　ポストエフェクト, シェーダー
