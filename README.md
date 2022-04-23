@@ -40,3 +40,7 @@ License
 Copyright (C) 2022 yunoda
 
 This software is released under the MIT License, see LICENSE.
+
+Keywords
+--------
+Unity, HLSL, CRT, Video, ブラウン管, テレビ, ポスプロ,　ポストエフェクト
