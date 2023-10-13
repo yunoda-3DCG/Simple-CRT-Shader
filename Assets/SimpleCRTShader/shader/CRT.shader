@@ -36,6 +36,8 @@ Shader "Simple CRT"
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
 
+            float _CurvatureScale;
+            
             int _WhiteNoiseOnOff;
             int _ScanlineOnOff;
             int _MonochormeOnOff;
@@ -75,7 +77,16 @@ Shader "Simple CRT"
             float GetRandom(float x);
             float EaseIn(float t0, float t1, float t);
 
-            v2f vert (appdata v)
+            float2 Distort(float2 uv)
+            {
+                float2 center = float2(0.5, 0.5);
+                uv = uv - center;
+                float len = length(uv);
+                uv = uv / (1.0 + len * _CurvatureScale);
+                return uv * (1 + (_CurvatureScale * 0.5)) + center;
+            }
+
+            v2f vert(appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
@@ -86,7 +97,11 @@ Shader "Simple CRT"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 uv = i.uv;
+                float2 uv = Distort(i.uv);
+                if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)
+                {
+                    return fixed4(0.0, 0.0, 0.0, 1.0); // Return black color for outbound pixels
+                }
 
                 /////Jump noise
                 uv.y = frac(uv.y + _ScreenJumpLevel);

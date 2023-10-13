@@ -13,6 +13,8 @@ public class CRTPostEffecterEditor : Editor
         CRTPostEffecter effect = target as CRTPostEffecter;
         effect.material = (Material)EditorGUILayout.ObjectField("Effect Material", effect.material, typeof(Material), false);
 
+        effect.curvatureScale = EditorGUILayout.FloatField("Curvature", effect.curvatureScale);
+
         using (new HorizontalScope(GUI.skin.box))
         {
             effect.whiteNoiseFrequency = EditorGUILayout.IntField("White Noise Freaquency (x/1000)", effect.whiteNoiseFrequency);
