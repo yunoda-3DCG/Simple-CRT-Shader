@@ -4,6 +4,7 @@ using UnityEngine;
 public class CRTPostEffecter : MonoBehaviour
 {
     public Material material;
+    public float curvatureScale = -0.1f;
     public int whiteNoiseFrequency = 1;
     public float whiteNoiseLength = 0.1f;
     private float whiteNoiseTimeLeft;
@@ -54,6 +55,7 @@ public class CRTPostEffecter : MonoBehaviour
     public Vector2Int resolutions;
 
     #region Properties in shader
+    private int _CurvatureScale;
     private int _WhiteNoiseOnOff;
     private int _ScanlineOnOff;
     private int _MonochormeOnOff;
@@ -83,6 +85,7 @@ public class CRTPostEffecter : MonoBehaviour
 
     private void Start()
     {
+        _CurvatureScale = Shader.PropertyToID("_CurvatureScale");
         _WhiteNoiseOnOff = Shader.PropertyToID("_WhiteNoiseOnOff");
         _ScanlineOnOff = Shader.PropertyToID("_ScanlineOnOff");
         _MonochormeOnOff = Shader.PropertyToID("_MonochormeOnOff");
@@ -126,6 +129,8 @@ public class CRTPostEffecter : MonoBehaviour
             }
         }
         //////
+        
+        material.SetFloat(_CurvatureScale, curvatureScale); 
         
         material.SetInteger(_LetterBoxOnOff, isLetterBox ? 0 : 1); 
         //material.SetInteger(_LetterBoxEdgeBlurOnOff, isLetterBoxEdgeBlur ? 0 : 1); 
